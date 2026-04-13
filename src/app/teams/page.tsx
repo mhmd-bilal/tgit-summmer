@@ -7,26 +7,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const teamCards = [
-  {
-    accentBg: 'bg-lavender-light',
-    borderClass: 'border-l-4 border-l-lavender',
-    groupLabel: 'Friends Zone',
-    groupLabelClass: 'text-deep-purple',
-    badgeClass: 'bg-deep-purple text-white',
-    btnLabel: 'View Scores',
-    btnClass: 'btn-purple-fill',
-    btnIcon: <BarChart3 size={14} />,
-  },
-  {
-    accentBg: 'bg-olive-bg/30',
-    borderClass: 'border-l-4 border-l-golden',
-    groupLabel: 'Scranton Branch',
-    groupLabelClass: 'text-olive-tag',
-    badgeClass: 'bg-golden text-white',
-    btnLabel: 'View Scores',
-    btnClass: 'btn-warm btn-warm-outline',
-    btnIcon: <Clipboard size={14} />,
-  },
+
   {
     accentBg: 'bg-[#FDF5ED]',
     borderClass: 'border-l-4 border-l-warm-orange',
@@ -36,27 +17,29 @@ const teamCards = [
     btnLabel: 'View Scores',
     btnClass: 'btn-warm btn-warm-fill',
     btnIcon: <Zap size={14} />,
-  },
-  {
-    accentBg: 'bg-lavender-light/60',
-    borderClass: 'border-l-4 border-l-deep-purple',
-    groupLabel: 'Brooklyn Unit',
-    groupLabelClass: 'text-deep-purple',
-    badgeClass: 'bg-deep-purple text-white',
-    btnLabel: 'View Scores',
-    btnClass: 'btn-purple-fill',
-    btnIcon: <Star size={14} />,
-  },
+  }
 ];
 
-const roleLabels = ['Captain', 'Assistant', 'Awesome', 'Detective'];
+type TeamName =
+  | "Bazinga"
+  | "Legendary Squad"
+  | "Lobster Gang"
+  | "Scranton Branch"
+  | "The Dunphy's"
+  | "Charlie's Angels"
+  | "Cupcake Crew"
+  | "99th Precinct";
 
-const flavorTexts = [
-  "Could this BE any more competitive?",
-  "Suit up for victory!",
-  "Bazinga! Another point on the board.",
-  "Nine-Nine! Detectives at work."
-];
+const flavorTexts = {
+  "Bazinga": "Bazinga! The geniuses strike again.",
+  "Legendary Squad": "Suit up! This team is truly legendary.",
+  "Lobster Gang": "You're their lobster—unstoppable together.",
+  "Scranton Branch": "Beets, Bears, Battle… and they scored again.",
+  "The Dunphy's": "Phil’s-osophy in action—winning with optimism.",
+  "Charlie's Angels": "Winning the Malibu way—smooth and effortless.",
+  "Cupcake Crew": "Sweet success, one point at a time.",
+  "99th Precinct": "Nine-Nine! Case closed with another victory."
+};
 
 export default function TeamsPage() {
   const router = useRouter();
@@ -142,9 +125,9 @@ export default function TeamsPage() {
               <div className={`p-5 ${style.accentBg} h-full flex flex-col`}>
                 <div className="flex items-start justify-between mb-2">
                   <div>
-                    <span className={`text-[0.6rem] font-inter font-bold uppercase tracking-widest ${style.groupLabelClass}`}>
+                    {/* <span className={`text-[0.6rem] font-inter font-bold uppercase tracking-widest ${style.groupLabelClass}`}>
                       {style.groupLabel}
-                    </span>
+                    </span> */}
                     <h3 className="text-xl font-playfair font-bold text-ink mt-1 flex items-center gap-2">
                       {team.name}{isLeading && (<Crown fill={style.groupLabelClass} />)}
                     </h3>
@@ -159,12 +142,16 @@ export default function TeamsPage() {
 
                 {/* Flavor Text Insert */}
                 <p className="text-xs text-ink-light/80 italic mb-4 font-pangolin">
-                  &quot;{flavorTexts[i % flavorTexts.length]}&quot;
+                  &quot;{flavorTexts[team.name]}&quot;
                 </p>
 
                 {/* Members */}
                 <div className="space-y-2.5 mt-auto mb-5">
-                  {team.members.map((member, j) => (
+                  {[
+                    { name: team.captain, role: 'Captain' },
+                    { name: team.viceCaptain, role: 'Vice Captain' },
+                    ...(team.members || []).map(m => ({ name: m, role: null }))
+                  ].map((memberObj, j) => (
                     <motion.div
                       key={j}
                       initial={{ opacity: 0, x: -8 }}
@@ -174,15 +161,15 @@ export default function TeamsPage() {
                     >
                       <div className="flex items-center gap-3">
                         <div className="avatar-circle avatar-circle-sm">
-                          {member.charAt(0)}
+                          {memberObj.name ? memberObj.name.charAt(0) : '?'}
                         </div>
-                        <span className="text-sm font-inter font-medium text-ink">
-                          {member}
+                        <span className="text-sm font-inter font-medium text-ink truncate max-w-40">
+                          {memberObj.name}
                         </span>
                       </div>
-                      {j === 0 && (
-                        <span className="tag-pill tag-pill-olive text-[0.55rem]">
-                          {roleLabels[i % roleLabels.length]}
+                      {memberObj.role && (
+                        <span className={`tag-pill text-[0.55rem] truncate ${memberObj.role === 'Captain' ? 'tag-pill-golden' : 'tag-pill-olive'}`}>
+                          {memberObj.role}
                         </span>
                       )}
                     </motion.div>

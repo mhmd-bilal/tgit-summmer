@@ -47,8 +47,8 @@ export default function Home() {
         className="hero-banner relative"
       >
         <div className="max-w-lg relative z-10">
-          <h1 className="text-4xl md:text-5xl font-playfair font-black text-deep-purple leading-tight mb-4">
-            TGIT Sitcom<br />Games
+          <h1 className="text-4xl md:text-5xl font-playfair font-black text-black leading-tighter mb-4">
+            TGIT Sitcom<br /><span className="text-deep-purple">Season</span>
           </h1>
           <p className="text-ink-light text-base md:text-lg font-inter mb-6 max-w-md">
             Welcome to the TGIT Sitcom Games! Compete in a day filled with laughter, strategy, and teamwork inspired by your favorite sitcoms. From trivia battles to creative challenges and high-energy office races, every moment brings teams closer to victory.

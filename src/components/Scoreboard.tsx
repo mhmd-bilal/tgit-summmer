@@ -59,9 +59,11 @@ export default function Scoreboard() {
           <span className="section-label text-warm-orange">Season 4 Final Rankings</span>
           <h1 className="text-4xl md:text-6xl font-playfair font-black text-ink mt-1 tracking-tight uppercase relative">
             The Scoreboard
-            <div className="absolute -top-4 -right-12 text-4xl opacity-50 rotate-45 drop-shadow-md z-0 pointer-events-none">
+            <motion.div className="absolute -top-4 -right-12 text-4xl opacity-50 rotate-45 drop-shadow-md z-0 pointer-events-none" initial={{ opacity: 0, rotate: 0 }}
+              animate={{ opacity: 1, rotate: 3 }}
+              transition={{ delay: 0.6 }}>
               🔫
-            </div>
+            </motion.div>
           </h1>
           <p className="text-ink-light font-inter text-sm mt-3 max-w-md leading-relaxed italic">
             The race for the Ultimate Consultant. Not just a Dundie, but true glory!
@@ -113,7 +115,7 @@ export default function Scoreboard() {
                           {team.name}
                         </h2>
                         <p className="text-sm text-ink-light font-inter mt-1">
-                          👥 {team.members.length} Active Producers
+                          👥 {team.captain} (C), {team.viceCaptain} (VC) + {team.members?.length || 0} Members
                         </p>
                         <div className="flex flex-wrap gap-2 mt-3">
                           <span className="tag-pill tag-pill-olive">Elite Division</span>
@@ -176,7 +178,7 @@ export default function Scoreboard() {
                         {team.name}
                       </h3>
                       <p className="text-xs text-ink-light font-inter">
-                        {team.members.slice(0, 2).join(' • ')} • {team.members.length} Members
+                        {team.captain} (C), {team.viceCaptain} (VC) + {team.members?.length || 0} Members
                       </p>
                       {team.gamesWon && team.gamesWon.length > 0 && (
                         <div className="flex flex-wrap gap-1 mt-1.5">
@@ -202,23 +204,6 @@ export default function Scoreboard() {
                     >
                       {team.score.toLocaleString()}
                     </motion.span>
-                    <div className="mt-1">
-                      {change === 'up' && (
-                        <span className="rank-up inline-flex items-center gap-0.5">
-                          <ChevronUp size={12} /> UP
-                        </span>
-                      )}
-                      {change === 'down' && (
-                        <span className="rank-down inline-flex items-center gap-0.5">
-                          <ChevronDown size={12} /> DOWN
-                        </span>
-                      )}
-                      {change === 'stable' && (
-                        <span className="rank-stable inline-flex items-center gap-0.5">
-                          <Minus size={12} /> STABLE
-                        </span>
-                      )}
-                    </div>
                   </div>
                 </motion.div>
               );

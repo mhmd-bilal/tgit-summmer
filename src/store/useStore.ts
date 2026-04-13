@@ -1,8 +1,20 @@
 import { create } from 'zustand';
 
+export type TeamName =
+  | "Bazinga"
+  | "Legendary Squad"
+  | "Lobster Gang"
+  | "Scranton Branch"
+  | "The Dunphy's"
+  | "Charlie's Angels"
+  | "Cupcake Crew"
+  | "99th Precinct";
+
 export interface Team {
+  captain: any;
+  viceCaptain: any;
   id: string;
-  name: string;
+  name: TeamName;        // Enforce valid team names
   members: string[];
   score: number;
   gamesWon?: string[];

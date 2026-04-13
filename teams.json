@@ -1,0 +1,168 @@
+{
+    "teams": {
+        "team-1": {
+            "id": "team-1",
+            "name": "Bazinga",
+            "captain": "Nimit Sharma",
+            "viceCaptain": "Karthik Ram",
+            "members": [
+                "Deepthitha Ramamoorthy",
+                "Sowndarya Selvam",
+                "Mohammed Sohail Rafeeq",
+                "Arko Bose",
+                "Ishaan Bhat",
+                "Sahil Tarun Agarwal",
+                "Suganth Thennarasu",
+                "Ayesha Isaac",
+                "Rajyasri"
+            ],
+            "score": 0
+        },
+        "team-2": {
+            "id": "team-2",
+            "name": "Legendary Squad",
+            "captain": "Malavika Dileep",
+            "viceCaptain": "Ruhi Mitra",
+            "members": [
+                "Suryaa SV",
+                "Dhruv Garg",
+                "Vipul Singh",
+                "Anish K",
+                "Maadhav Krishnamurthy",
+                "Pratik Dev",
+                "Sanjeev Kumar Seenivasan",
+                "Saishree Ramaswamy",
+                "Priyanka Y"
+            ],
+            "score": 0
+        },
+        "team-3": {
+            "id": "team-3",
+            "name": "Lobster Gang",
+            "captain": "Shivang Rai",
+            "viceCaptain": "Anirudh Rishikesh Urs",
+            "members": [
+                "Mathan Sureshkumar",
+                "Aryan Kumar",
+                "Vaishnavi Bharadwaj",
+                "Darshan Deepak Katkar",
+                "Dharani Chandran",
+                "Sruthi Elaprolu",
+                "Subashree N",
+                "Unnamalai Narayanan",
+                "Saikrupa P",
+                "Veena"
+            ],
+            "score": 0
+        },
+        "team-4": {
+            "id": "team-4",
+            "name": "Dunder Mifflin Crew",
+            "captain": "Ayan Maity",
+            "viceCaptain": "Keegan Louis Moraes",
+            "members": [
+                "Adarsana Gopalakrishnan",
+                "Div Chaudhary",
+                "Zainah Raheman Shaikh",
+                "Ananth Vishnubhotla",
+                "Harshini Gowrishankar",
+                "Shania Job",
+                "Manoj Chandrasekaran",
+                "Rohan Pullela",
+                "Sanjay Sajeevan"
+            ],
+            "score": 0
+        },
+        "team-5": {
+            "id": "team-5",
+            "name": "Phil’s-osophy Clan",
+            "captain": "Anshul Roy",
+            "viceCaptain": "Pratyusha Rahul Garaye",
+            "members": [
+                "Navin Kumar Lakshminarayanan",
+                "Tharun Karthick A R K",
+                "Soorya G",
+                "Bobby Prathikshana Murali Raj",
+                "Nirmal Nair",
+                "Roshini Gopalan",
+                "Subash Devarajan",
+                "Somnath Amancherla",
+                "Chitra G"
+            ],
+            "score": 0
+        },
+        "team-6": {
+            "id": "team-6",
+            "name": "Charlie’s Angels",
+            "captain": "Navkrut Rupesh Vaishya",
+            "viceCaptain": "Ayush Kumar",
+            "members": [
+                "Sneha B A K",
+                "Anuraag Mangesh Wange",
+                "Varun Syam Mohan",
+                "Dhamodaran Babu",
+                "Gokul Kumar S",
+                "Satyam Bhattacharyya",
+                "Bhavik Firke",
+                "Thendral M",
+                "Binesh M"
+            ],
+            "score": 0
+        },
+        "team-7": {
+            "id": "team-7",
+            "name": "Cupcake Crew",
+            "captain": "Siddharth Sharma",
+            "viceCaptain": "Yeshaswini C V M",
+            "members": [
+                "Harshvardhan Dhatterwall",
+                "Somya Bansal",
+                "Keshav Dahiya",
+                "Aishwarya Kumar",
+                "Ojas Shandilya",
+                "Rohan Suratkal",
+                "Lohith Munakala",
+                "Akshaya Sivanantham",
+                "Sapura"
+            ],
+            "score": 0
+        },
+        "team-8": {
+            "id": "team-8",
+            "name": "99th Precinct",
+            "captain": "Pravan Jijo Panikulangara",
+            "viceCaptain": "Kiran Seetharam",
+            "members": [
+                "Arindham Srinivasan",
+                "Ayush Das",
+                "Vipransh Tyagi",
+                "Arthi Saradha Natarajan",
+                "Kavin Madhavan",
+                "Sai Karthik R",
+                "Hrushika Chitloor",
+                "Kushagra Jain",
+                "Akalya Muthanandam",
+                "Sinchana"
+            ],
+            "score": 0
+        },
+        "team-9": {
+            "id": "team-9",
+            "name": "The Rose Family",
+            "captain": "Himan Nayak",
+            "viceCaptain": "Utkarsh Goyal",
+            "members": [
+                "Keerthana Devi Anandharaj",
+                "Aarav Goel",
+                "Rishabh Dobhal",
+                "Aprajita Bansal",
+                "Dhruthi Bhat",
+                "Ritika Satheesh",
+                "Abhived Nair",
+                "Pavan CH V L N",
+                "Amol Datt"
+            ],
+            "score": 0
+        }
+    }
+}
