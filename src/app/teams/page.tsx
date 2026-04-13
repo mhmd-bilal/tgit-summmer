@@ -207,44 +207,6 @@ export default function TeamsPage() {
           </div>
         )}
       </div>
-
-      {/* ── New Team CTA ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="card-dashed-brown p-8 flex flex-col items-center justify-center text-center relative overflow-hidden"
-      >
-        <h2 className="text-2xl md:text-3xl font-playfair font-black text-ink mb-3 leading-tight z-10 relative">
-          Want to Register a New Team?
-        </h2>
-        <p className="text-sm text-ink-light font-inter leading-relaxed mb-6 max-w-md z-10 relative">
-          Gather your squad and enter the TGIT Sitcom Games to compete across trivia, creative challenges, and the ultimate heist!
-        </p>
-        <button className="btn-warm btn-warm-fill z-10 relative px-8">
-          Add New Team
-        </button>
-
-        {/* Subtle Thematic Prop Insert */}
-        <div className="absolute top-4 right-4 text-6xl opacity-10 rotate-12 drop-shadow-md z-0 pointer-events-none">
-          🏆
-        </div>
-        <div className="absolute bottom-4 left-4 text-5xl opacity-10 -rotate-12 drop-shadow-md z-0 pointer-events-none">
-          ☕
-        </div>
-      </motion.div>
-
-      {/* FAB */}
-      <motion.button
-        onClick={() => router.push('/admin-details')}
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.6, type: "spring" }}
-        className="fixed bottom-6 right-6 w-12 h-12 bg-deep-purple text-white rounded-full shadow-lg flex items-center justify-center hover:bg-deep-purple/90 transition-colors z-40"
-        aria-label="Add team"
-      >
-        <Plus size={20} />
-      </motion.button>
     </div>
   );
 }
