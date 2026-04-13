@@ -56,7 +56,7 @@ export default function Navigation() {
           </div>
 
           {/* Right side icons */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* <div className="hidden md:flex items-center gap-3">
             <button className="p-2 rounded-lg hover:bg-muted transition-colors text-ink-light hover:text-ink" aria-label="Notifications">
               <Bell size={18} />
             </button>
@@ -66,7 +66,7 @@ export default function Navigation() {
             <div className="avatar-circle avatar-circle-sm ml-1 cursor-pointer hover-pop">
               <span>U</span>
             </div>
-          </div>
+          </div> */}
 
           {/* Mobile toggle */}
           <button
@@ -103,14 +103,14 @@ export default function Navigation() {
               </Link>
             );
           })}
-          <div className="flex items-center gap-3 px-4 pt-3 border-t border-border mt-2">
+          {/* <div className="flex items-center gap-3 px-4 pt-3 border-t border-border mt-2">
             <button className="p-2 rounded-lg hover:bg-muted transition-colors text-ink-light" aria-label="Notifications">
               <Bell size={18} />
             </button>
             <button className="p-2 rounded-lg hover:bg-muted transition-colors text-ink-light" aria-label="Settings">
               <Settings size={18} />
             </button>
-          </div>
+          </div> */}
         </motion.div>
       )}
     </nav>
