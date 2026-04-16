@@ -190,22 +190,23 @@ export default function ClientFirebaseInit() {
           score: 0
         }
       ];
-      const batch = writeBatch(db);
-      teamsData.forEach((team) => {
-        const ref = doc(db, "teams", team.id);
-        batch.set(ref, team);
-      });
+      // const batch = writeBatch(db);
+      // teamsData.forEach((team) => {
+      //   const ref = doc(db, "teams", team.id);
+      //   batch.set(ref, team);
+      // });
 
-      await batch.commit();
+      // await batch.commit();
       console.log("teams seeded successfully.");
     };
 
     seedTeamsIfEmpty();
 
-    // Listen to teams instead of teams
+    // Listen to teams sorted by score, then by stable secondary key so equal-score order stays consistent
     const teamsQ = query(
       collection(db, "teams"),
-      orderBy("score", "desc")
+      orderBy("score", "desc"),
+      orderBy("name", "asc")
     );
 
     const unsubTeams = onSnapshot(
