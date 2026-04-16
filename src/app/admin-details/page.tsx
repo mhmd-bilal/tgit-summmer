@@ -2,9 +2,9 @@
 
 import { useStore } from "@/store/useStore";
 import { db } from "@/lib/firebase";
-import { doc, updateDoc, collection, writeBatch } from "firebase/firestore";
+import { doc, updateDoc, writeBatch } from "firebase/firestore";
 import { useState } from "react";
-import { Plus, Minus, RefreshCw, AlertTriangle } from "lucide-react";
+import { RefreshCw, AlertTriangle } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function AdminPage() {
@@ -12,6 +12,7 @@ export default function AdminPage() {
   const games = useStore((state) => state.games);
   const [loading, setLoading] = useState<string | null>(null);
   const [scoreInputs, setScoreInputs] = useState<Record<string, number>>({});
+  const [scoreAdjustments, setScoreAdjustments] = useState<Record<string, number>>({});
 
   const defaultGames = [
     { id: "sitcom-trivia", name: "Suit Up &Answer!", points: 30 },
@@ -181,25 +182,30 @@ export default function AdminPage() {
                     {team.score}
                   </span>
 
-                  <div className="flex rounded-xl overflow-hidden border-2 border-muted">
-                    <motion.button
-                      whileTap={{ scale: 0.9 }}
-                      onClick={() => updateScore(team.id, team.score, -10)}
-                      disabled={loading === team.id || team.score < 10}
-                      className="p-3 bg-coral/5 hover:bg-coral/15 text-coral transition-colors disabled:opacity-30 border-r-2 border-muted"
-                      title="Subtract 10 points"
-                    >
-                      <Minus size={20} />
-                    </motion.button>
-                    <motion.button
-                      whileTap={{ scale: 0.9 }}
-                      onClick={() => updateScore(team.id, team.score, 10)}
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="number"
+                      value={scoreAdjustments[team.id] ?? 0}
+                      onChange={(event) =>
+                        setScoreAdjustments((prev) => ({
+                          ...prev,
+                          [team.id]: Number(event.target.value)
+                        }))
+                      }
                       disabled={loading === team.id}
-                      className="p-3 bg-mint/5 hover:bg-mint/15 text-emerald-600 transition-colors disabled:opacity-30"
-                      title="Add 10 points"
+                      className="w-24 rounded-2xl border border-muted bg-white px-3 py-2 text-sm text-ink"
+                      step={1}
+                      placeholder="0"
+                      title="Enter score adjustment"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => updateScore(team.id, team.score, scoreAdjustments[team.id] ?? 0)}
+                      disabled={loading === team.id}
+                      className="rounded-2xl bg-ink px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-ink/90 disabled:opacity-50"
                     >
-                      <Plus size={20} />
-                    </motion.button>
+                      Apply
+                    </button>
                   </div>
                 </div>
               </div>
