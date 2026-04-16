@@ -70,7 +70,7 @@ export default function ClientFirebaseInit() {
             "Aishwarya Kumar",
             "Somnath Amancherla"
           ],
-          score: 30
+          score: 220
         },
         {
           id: "team-3",
@@ -110,7 +110,7 @@ export default function ClientFirebaseInit() {
             "Dharani Chandran",
             "Binesh M"
           ],
-          score: 45
+          score: 340
         },
         {
           id: "team-5",
@@ -130,7 +130,7 @@ export default function ClientFirebaseInit() {
             "Ritika Satheesh",
             "Amol Datt"
           ],
-          score: 70
+          score: 160
         },
         {
           id: "team-6",
@@ -149,7 +149,7 @@ export default function ClientFirebaseInit() {
             "Deepthitha Ramamoorthy",
             "Sahil Tarun Agarwal"
           ],
-          score: 5
+          score: 70
         },
         {
           id: "team-7",
@@ -168,7 +168,7 @@ export default function ClientFirebaseInit() {
             "Anshul Roy",
             "Abhived Nair"
           ],
-          score: 0
+          score: 105
         },
         {
           id: "team-8",
@@ -187,7 +187,7 @@ export default function ClientFirebaseInit() {
             "Keerthana Devi Anandhraj",
             "Saishree Ramaswamy"
           ],
-          score: 30
+          score: 120
         }
       ];
       const batch = writeBatch(db);
