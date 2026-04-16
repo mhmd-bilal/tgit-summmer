@@ -202,11 +202,10 @@ export default function ClientFirebaseInit() {
 
     seedTeamsIfEmpty();
 
-    // Listen to teams sorted by score, then by stable secondary key so equal-score order stays consistent
+    // Listen to teams ordered by score, then sort equal-score results locally to keep order stable
     const teamsQ = query(
       collection(db, "teams"),
-      orderBy("score", "desc"),
-      orderBy("name", "asc")
+      orderBy("score", "desc")
     );
 
     const unsubTeams = onSnapshot(
@@ -216,6 +215,10 @@ export default function ClientFirebaseInit() {
           id: doc.id,
           ...doc.data()
         })) as Team[];
+        teamsData.sort((a, b) => {
+          if (b.score !== a.score) return b.score - a.score;
+          return a.name.localeCompare(b.name);
+        });
         setTeams(teamsData);
       },
       (error) => {
