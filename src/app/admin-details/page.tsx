@@ -4,32 +4,81 @@ import { useStore } from "@/store/useStore";
 import { db } from "@/lib/firebase";
 import { doc, updateDoc, collection, writeBatch } from "firebase/firestore";
 import { useState } from "react";
-import { Plus, Minus, RefreshCw, Database, AlertTriangle } from "lucide-react";
+import { Plus, Minus, RefreshCw, AlertTriangle } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function AdminPage() {
   const teams = useStore((state) => state.teams);
   const games = useStore((state) => state.games);
   const [loading, setLoading] = useState<string | null>(null);
+  const [scoreInputs, setScoreInputs] = useState<Record<string, number>>({});
 
-  const toggleGameWin = async (teamId: string, gameId: string, isWinning: boolean, gamePoints: number, currentScore: number, currentGamesWon: string[]) => {
-    setLoading(`${teamId}-${gameId}`);
+  const defaultGames = [
+    { id: "sitcom-trivia", name: "Suit Up &Answer!", points: 30 },
+    { id: "guess-who", name: "Say Whaaat?", points: 30 },
+    { id: "obstacle-olympics", name: "Office Olympics", points: 40 },
+    { id: "halloween-heist", name: "Halloween Heist", points: 50 },
+    { id: "clay-model-making", name: "Sculpt Off", points: 30 }
+  ];
+
+  const adminGames = games.length > 0 ? games : defaultGames;
+
+  const gameScoringOptions: Record<string, { description: string; options: number[] }> = {
+    "sitcom-trivia": {
+      description: "Trivia points are awarded by difficulty: Easy 10, Mid 20, Hard 30.",
+      options: [10, 20, 30]
+    },
+    "guess-who": {
+      description: "Correct guesses score based on clue depth: 30 / 20 / 10.",
+      options: [30, 20, 10]
+    },
+    "obstacle-olympics": {
+      description: "Office Olympics is ranked: top finish gets the highest points.",
+      options: [40, 30, 20, 10]
+    },
+    "halloween-heist": {
+      description: "Winner takes the biggest haul; use this to award the final heist score.",
+      options: [50, 40, 30]
+    },
+    "clay-model-making": {
+      description: "Judge-scored sculpting event: award points based on judge feedback.",
+      options: [30, 25, 20]
+    }
+  };
+
+  const getGameScoreOptions = (gameId: string, points: number) => {
+    return gameScoringOptions[gameId]?.options ?? [points];
+  };
+
+  const getSelectedPoints = (teamId: string, gameId: string, defaultPoints: number) => {
+    const key = `${teamId}-${gameId}`;
+    return scoreInputs[key] ?? getGameScoreOptions(gameId, defaultPoints)[0];
+  };
+
+  const awardGameScore = async (
+    teamId: string,
+    gameId: string,
+    gameName: string,
+    scoreValue: number,
+    currentScore: number,
+    currentGamesWon: string[]
+  ) => {
+    const loadingKey = `${teamId}-${gameId}`;
+    setLoading(loadingKey);
+
     try {
-      const newGamesWon = isWinning
-        ? [...(currentGamesWon || []), gameId]
-        : (currentGamesWon || []).filter(id => id !== gameId);
+      const newGamesWon = currentGamesWon?.includes(gameId)
+        ? currentGamesWon
+        : [...(currentGamesWon || []), gameId];
 
-      const newScore = isWinning
-        ? currentScore + gamePoints
-        : Math.max(0, currentScore - gamePoints);
-
+      const newScore = Math.max(0, currentScore + scoreValue);
       await updateDoc(doc(db, "teams", teamId), {
         gamesWon: newGamesWon,
         score: newScore
       });
     } catch (error) {
-      console.error("Error toggling game win:", error);
-      alert("Failed to update game status.");
+      console.error(`Error awarding score for ${gameName}:`, error);
+      alert("Failed to award game points. Check console.");
     } finally {
       setLoading(null);
     }
@@ -92,6 +141,20 @@ export default function AdminPage() {
         </div>
       </div>
 
+      {games.length === 0 && (
+        <div className="mb-6 p-4 rounded-3xl bg-amber-50 border border-amber-200 text-amber-900 text-sm">
+          Using the TGIT games list from the Games page because the Firestore games collection is empty.
+        </div>
+      )}
+
+      <div className="mb-6 flex flex-wrap gap-2">
+        {adminGames.map((game) => (
+          <span key={game.id} className="tag-pill bg-white text-ink border border-muted">
+            {game.name} ({game.points} pts)
+          </span>
+        ))}
+      </div>
+
       {/* Team Score Controls */}
       <div className="grid gap-4">
         {teams.length === 0 ? (
@@ -141,26 +204,56 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              {/* Games Won Toggles */}
-              {games.length > 0 && (
+              {/* Award Game Scores */}
+              {adminGames.length > 0 && (
                 <div className="pt-3 border-t border-muted/30">
-                  <p className="text-xs font-inter text-ink-light mb-2 font-bold">GAMES WON</p>
-                  <div className="flex flex-wrap gap-2">
-                    {games.map(game => {
+                  <p className="text-xs font-inter text-ink-light mb-4 font-bold">Award Game Scores</p>
+                  <div className="space-y-3">
+                    {adminGames.map(game => {
+                      const key = `${team.id}-${game.id}`;
+                      const options = getGameScoreOptions(game.id, game.points);
+                      const selectedPoints = getSelectedPoints(team.id, game.id, game.points);
                       const isWon = team.gamesWon?.includes(game.id) || false;
+
                       return (
-                        <button
-                          key={game.id}
-                          onClick={() => toggleGameWin(team.id, game.id, !isWon, game.points, team.score, team.gamesWon || [])}
-                          disabled={loading === `${team.id}-${game.id}`}
-                          className={`text-xs px-3 py-1.5 rounded-lg border font-inter transition-colors flex items-center gap-1.5 ${isWon
-                            ? 'bg-golden/20 border-golden text-ink font-bold'
-                            : 'bg-white/50 border-muted text-ink-light hover:border-ink/30'
-                            }`}
-                        >
-                          {isWon && <span className="text-[10px]">✅</span>}
-                          {game.name} ({game.points} pts)
-                        </button>
+                        <div key={game.id} className="flex flex-col gap-3 rounded-3xl border border-muted bg-white/80 p-3 md:flex-row md:items-center md:justify-between">
+                          <div className="min-w-0">
+                            <div className="flex flex-wrap items-center gap-2 mb-1">
+                              <span className="text-sm font-semibold text-ink">{game.name}</span>
+                              {isWon && (
+                                <span className="rounded-full bg-golden/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em] text-golden">
+                                  Won
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[11px] text-ink-light leading-relaxed">
+                              {gameScoringOptions[game.id]?.description ?? 'Select a score value to award for this game.'}
+                            </p>
+                          </div>
+
+                          <div className="flex flex-wrap items-center gap-2">
+                            <select
+                              value={selectedPoints}
+                              onChange={(event) => setScoreInputs(prev => ({ ...prev, [key]: Number(event.target.value) }))}
+                              disabled={loading === key}
+                              className="rounded-2xl border border-muted bg-white px-3 py-2 text-sm text-ink"
+                            >
+                              {options.map(value => (
+                                <option key={value} value={value}>
+                                  {value} pts
+                                </option>
+                              ))}
+                            </select>
+                            <button
+                              type="button"
+                              onClick={() => awardGameScore(team.id, game.id, game.name, selectedPoints, team.score, team.gamesWon || [])}
+                              disabled={loading === key}
+                              className="rounded-2xl bg-ink px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-ink/90 disabled:opacity-50"
+                            >
+                              Award
+                            </button>
+                          </div>
+                        </div>
                       );
                     })}
                   </div>

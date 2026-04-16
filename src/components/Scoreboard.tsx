@@ -11,6 +11,7 @@ export default function Scoreboard() {
   const games = useStore((state) => state.games);
   const [topTeamId, setTopTeamId] = useState<string | null>(null);
   const [countdown, setCountdown] = useState("02:45:00");
+  const allScoresEqual = teams.length > 0 && teams.every((team) => team.score === teams[0].score);
 
   useEffect(() => {
     if (teams.length > 0) {
@@ -86,7 +87,7 @@ export default function Scoreboard() {
         <div className="lg:col-span-2 space-y-4">
           <AnimatePresence>
             {teams.map((team, index) => {
-              if (index === 0) {
+              if (index === 0 && !allScoresEqual) {
                 // ── Champion Card ──
                 return (
                   <motion.div
@@ -164,7 +165,7 @@ export default function Scoreboard() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
-                  className={`${index === 1 ? 'card-purple-accent' : 'card-clean'} p-5 flex items-center justify-between hover-lift`}
+                  className={`${index === 1 && !allScoresEqual ? 'card-purple-accent' : 'card-clean'} p-5 flex items-center justify-between hover-lift`}
                 >
                   <div className="flex items-center gap-4">
                     <span className="text-2xl font-playfair font-bold text-ink-light w-8 text-center">
