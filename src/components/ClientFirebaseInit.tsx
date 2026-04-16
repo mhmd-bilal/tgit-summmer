@@ -70,7 +70,7 @@ export default function ClientFirebaseInit() {
             "Aishwarya Kumar",
             "Somnath Amancherla"
           ],
-          score: 220
+          score: 320
         },
         {
           id: "team-3",
