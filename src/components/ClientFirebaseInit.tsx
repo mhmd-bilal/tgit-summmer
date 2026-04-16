@@ -110,7 +110,7 @@ export default function ClientFirebaseInit() {
             "Dharani Chandran",
             "Binesh M"
           ],
-          score: 340
+          score: 440
         },
         {
           id: "team-5",
@@ -130,7 +130,7 @@ export default function ClientFirebaseInit() {
             "Ritika Satheesh",
             "Amol Datt"
           ],
-          score: 160
+          score: 235
         },
         {
           id: "team-6",
@@ -187,7 +187,7 @@ export default function ClientFirebaseInit() {
             "Keerthana Devi Anandhraj",
             "Saishree Ramaswamy"
           ],
-          score: 120
+          score: 170
         }
       ];
       const batch = writeBatch(db);
