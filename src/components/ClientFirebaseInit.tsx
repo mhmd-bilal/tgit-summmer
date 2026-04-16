@@ -50,7 +50,7 @@ export default function ClientFirebaseInit() {
             "Somya Bansal",
             "Sanjay Sajeevan"
           ],
-          score: 0
+          score: 10
         },
         {
           id: "team-2",
@@ -70,7 +70,7 @@ export default function ClientFirebaseInit() {
             "Aishwarya Kumar",
             "Somnath Amancherla"
           ],
-          score: 0
+          score: 30
         },
         {
           id: "team-3",
@@ -90,7 +90,7 @@ export default function ClientFirebaseInit() {
             "Ishaan Bhat",
             "Thendral M"
           ],
-          score: 0
+          score: 25
         },
         {
           id: "team-4",
@@ -110,7 +110,7 @@ export default function ClientFirebaseInit() {
             "Dharani Chandran",
             "Binesh M"
           ],
-          score: 0
+          score: 45
         },
         {
           id: "team-5",
@@ -130,7 +130,7 @@ export default function ClientFirebaseInit() {
             "Ritika Satheesh",
             "Amol Datt"
           ],
-          score: 0
+          score: 70
         },
         {
           id: "team-6",
@@ -149,7 +149,7 @@ export default function ClientFirebaseInit() {
             "Deepthitha Ramamoorthy",
             "Sahil Tarun Agarwal"
           ],
-          score: 0
+          score: 5
         },
         {
           id: "team-7",
@@ -187,16 +187,16 @@ export default function ClientFirebaseInit() {
             "Keerthana Devi Anandhraj",
             "Saishree Ramaswamy"
           ],
-          score: 0
+          score: 30
         }
       ];
-      // const batch = writeBatch(db);
-      // teamsData.forEach((team) => {
-      //   const ref = doc(db, "teams", team.id);
-      //   batch.set(ref, team);
-      // });
+      const batch = writeBatch(db);
+      teamsData.forEach((team) => {
+        const ref = doc(db, "teams", team.id);
+        batch.set(ref, team);
+      });
 
-      // await batch.commit();
+      await batch.commit();
       console.log("teams seeded successfully.");
     };
 
