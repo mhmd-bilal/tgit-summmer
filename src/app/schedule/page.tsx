@@ -7,49 +7,42 @@ import { useEffect, useState } from "react";
 
 export const scheduleData = [
   {
-    id: "guess-who",
-    time: "10:30",
-    title: "Guess Who",
-    location: "Hybrid - Teams & Pegausu 401",
-    description: "Teams identify sitcom characters using progressive clues.",
-    label: "Morning Brief",
-    icon: Eye,
-    style: { labelClass: 'tag-pill-olive', cardClass: '' }
+    id: "halloween-briefing",
+    time: "11:00",
+    displayTime: "11:00 AM",
+    title: "Halloween Heist Briefing",
+    location: "Teams & Pegasus 401",
+    description: "Kick off the day with the Halloween Heist briefing and final instructions.",
+    label: "Opening Brief",
+    icon: Crown,
+    style: { labelClass: 'tag-pill-purple', cardClass: 'border-purple-300 bg-purple-50' }
   },
-  // {
-  //   id: "lunch",
-  //   time: "01:00 PM",
-  //   title: "Lunch Break",
-  //   location: "Cafeteria",
-  //   description: "Networking and refreshments.",
-  //   label: "Lunch Break",
-  //   icon: Clock,
-  //   style: { labelClass: 'tag-pill-golden', cardClass: 'border-golden/40 bg-golden-light/20' }
-  // },
   {
-    id: "trivia",
-    time: "14:30",
-    title: "Sitcom Trivia",
+    id: "suit-up-answer",
+    time: "12:00",
+    displayTime: "12:00 PM",
+    title: "Suit Up &Answer!",
     location: "Online - Teams",
-    description: "Timed quiz covering multiple sitcoms with Easy, Mid, and Hard difficulty levels.",
-    label: "After Lunch",
+    description: "Timed quiz covering 8 sitcoms with Easy, Mid, and Hard difficulty levels.",
+    label: "Quiz Session",
     icon: BarChart3,
     style: { labelClass: 'tag-pill-olive', cardClass: '' }
   },
-
   {
-    id: "clay-modelling",
-    time: "16:00",
-    title: "Clay Modelling",
-    location: "202 - In front of Pantry",
-    description: "Teams sculpt iconic sitcom items selected randomly from cards.",
-    label: "Creative Event",
-    icon: Palette,
-    style: { labelClass: 'tag-pill-coral', cardClass: '' }
+    id: "group-photo",
+    time: "12:30",
+    displayTime: "12:30 PM",
+    title: "Group Photo at Central Perk (202)",
+    location: "Central Perk (202)",
+    description: "Gather for the official TGIT group photo in front of Central Perk.",
+    label: "Photo Moment",
+    icon: MapPin,
+    style: { labelClass: 'tag-pill-brown', cardClass: '' }
   },
   {
     id: "office-olympics",
-    time: "17:30",
+    time: "14:30",
+    displayTime: "2:30 PM",
     title: "Office Olympics",
     location: "202",
     description: "A sequence of physical challenges including Flight Fight, Chair Chase, Paper Toss, and Speed Stack.",
@@ -58,14 +51,37 @@ export const scheduleData = [
     style: { labelClass: 'tag-pill-brown', cardClass: 'border-brown/40 bg-[#FDF5ED]' }
   },
   {
-    id: "halloween-heist",
-    time: "All Day",
-    title: "Halloween Heist (All-Day Event)",
-    location: "Across all Units",
-    description: "Inspired by Brooklyn Nine-Nine. Teams collect and defend character tokens throughout the day, with the final winner announced during the Office Olympics.",
-    label: "All-Day Heist",
-    icon: Crown,
-    style: { labelClass: 'tag-pill-purple', cardClass: 'border-purple-300 bg-purple-50' }
+    id: "say-whaaat",
+    time: "16:15",
+    displayTime: "4:15 PM",
+    title: "Say Whaaat",
+    location: "Hybrid - Teams & Pegasus 401",
+    description: "Identify sitcom characters using progressive clues in this fast-paced round.",
+    label: "Quick Round",
+    icon: Eye,
+    style: { labelClass: 'tag-pill-olive', cardClass: '' }
+  },
+  {
+    id: "snacks",
+    time: "17:00",
+    displayTime: "5:00 PM",
+    title: "Snacks",
+    location: "Pantry",
+    description: "Take a break with refreshments before the final sculpting challenge.",
+    label: "Break Time",
+    icon: Clock,
+    style: { labelClass: 'tag-pill-coral', cardClass: '' }
+  },
+  {
+    id: "sculpt-off",
+    time: "17:30",
+    displayTime: "5:30 PM",
+    title: "Sculpt Off",
+    location: "202 - In front of Pantry",
+    description: "Teams sculpt iconic sitcom items selected randomly from cards and are judged on creativity, accuracy, and presentation.",
+    label: "Creative Event",
+    icon: Palette,
+    style: { labelClass: 'tag-pill-coral', cardClass: '' }
   }
 ];
 
@@ -134,11 +150,8 @@ export default function SchedulePage() {
                       All Day
                     </div>
                   ) : (
-                    <div className="absolute -left-14 top-7 timeline-time select-none">
-                      {item.time}
-                      {/* <span className="text-[0.6rem] ml-0.5">
-                        {parseInt(item.time) < 12 ? 'AM' : 'PM'}
-                      </span> */}
+                    <div className="absolute -left-10 top-7 timeline-time select-none">
+                      {item.displayTime ?? item.time}
                     </div>
                   )}
 

@@ -21,7 +21,7 @@ const getCategoryAccent = (category: string) => {
 const onlineGames = [
   {
     id: "sitcom-trivia",
-    name: "Sitcom Trivia",
+    name: "Suit Up &Answer!",
     description: "A timed quiz covering eight sitcoms with varying difficulty levels.",
     points: "10-30",
     rules: [
@@ -39,19 +39,19 @@ const onlineGames = [
     badges: ["Timed"]
   },
   {
-    id: "guess-what",
-    name: "Guess What?",
-    description: "Identify a character, object, or reference using progressive clues.",
+    id: "guess-who",
+    name: "Say Whaaat?",
+    description: "Identify a sitcom character using progressive clues across multiple rounds.",
     points: "10-30",
     rules: [
-      "8 sitcoms with 2 questions each.",
+      "8 sitcoms with 2 character clues each.",
       "4 additional general questions (20 questions total).",
       "Each question starts with the first clue.",
       "Additional clues revealed every 30 seconds.",
       "Correct after 1st clue: 30 points.",
       "Correct after 2nd clue: 20 points.",
       "Correct after 3rd clue: 10 points.",
-      "Points decrease with time and number of clues used."
+      "Points decrease with every clue used."
     ],
     category: "HYBRID",
     image: "/images/guess.png",
@@ -96,7 +96,7 @@ const offlineGames = [
   },
   {
     id: "clay-model-making",
-    name: "Clay Model Making",
+    name: "Sculpt Off",
     description: "Teams sculpt iconic sitcom items selected randomly from cards.",
     points: "Judged",
     rules: [
